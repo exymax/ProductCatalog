@@ -1,0 +1,14 @@
+{% extends 'admin/product/formLayout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <h2>New category</h2>
+                {{ include('admin/category/_form.html.twig', {
+                    'buttonText':'Add'
+                }) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

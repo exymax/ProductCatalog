@@ -26,14 +26,3 @@ security:
         ROLE_ADMIN: [ROLE_MANAGE_PRODUCT, ROLE_MANAGE_CATEGORY, ROLE_MANAGE_USER, ROLE_BROWSE_CATALOG, ROLE_ALLOWED_TO_SWITCH]
         ROLE_MOD: [ROLE_MANAGE_PRODUCT, ROLE_MANAGE_CATEGORY, ROLE_BROWSE_CATALOG]
         ROLE_USER: [ROLE_BROWSE_CATALOG]
-
-
-    access_control:
-        # require ROLE_ADMIN for /admin*
-        #- { path: /, roles: ROLE_USER }
-        - { path: ^/admin/user, roles: ROLE_MANAGE_USER }
-        - { path: ^/admin/product, roles: ROLE_MANAGE_PRODUCT }
-        - { path: ^/catalog, roles: ROLE_BROWSE_CATALOG }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -16,11 +16,10 @@ class ProductsService
 
     public function categoryExists($categoryName)
     {
-        $category = $this->em->getRepository("AppBundle:ProductCategory")->findOneBy(['name' => $categoryName]);
-        if($category instanceof ProductCategory) {
+        $category = $this->em->getRepository('AppBundle:ProductCategory')->findOneBy(['name' => $categoryName]);
+        if ($category instanceof ProductCategory) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

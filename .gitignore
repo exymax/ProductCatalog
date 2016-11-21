@@ -14,9 +14,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/php-cs-fixer.phar
-<<<<<<< HEAD
 .idea
-=======
-.idea
->>>>>>> 8c80163c5da125a5d84fdf29521e8f80dd9d2bbb
+php-cs-fixer.phar

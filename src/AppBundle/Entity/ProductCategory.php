@@ -2,56 +2,73 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ProductCategory.
- *
  * @ORM\Table(name="product_categories")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductCategoryRepository")
  */
-class ProductCategory
+class ProductCategory extends AbstractType
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active;
+    private $active = true;
 
     /**
-     * Get id.
-     *
-     * @return int
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductCategory", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductCategory", mappedBy="parent")
+     */
+    private $children;
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function setChildren($children)
+    {
+        $this->children = $children;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent(ProductCategory $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return ProductCategory
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -59,23 +76,11 @@ class ProductCategory
         return $this;
     }
 
-    /**
-     * Get name.
-     *
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * Set active.
-     *
-     * @param bool $active
-     *
-     * @return ProductCategory
-     */
     public function setActive($active)
     {
         $this->active = $active;
@@ -83,11 +88,6 @@ class ProductCategory
         return $this;
     }
 
-    /**
-     * Get active.
-     *
-     * @return bool
-     */
     public function getActive()
     {
         return $this->active;
@@ -96,5 +96,10 @@ class ProductCategory
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
     }
 }

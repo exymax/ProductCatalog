@@ -5,11 +5,11 @@ namespace AppBundle\Form;
 use AppBundle\Entity\ProductCategory;
 use AppBundle\Repository\ProductCategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,9 +23,10 @@ class ProductType extends AbstractType
                 'placeholder' => 'Choose a category',
                 'class' => ProductCategory::class,
                 'query_builder' => function (ProductCategoryRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
+                    return $repo->createOrderedByParentQueryBuilder();
                 },
             ])
+
             ->add('description', TextareaType::class, [
                 'empty_data' => 'Enter description',
             ])

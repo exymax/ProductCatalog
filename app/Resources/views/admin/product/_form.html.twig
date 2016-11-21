@@ -1,11 +1,11 @@
 {{ form_start(productForm) }}
-                    {{ form_row(productForm.name) }}
-                    {{ form_row(productForm.category) }}
-                    {{ form_row(productForm.sku) }}
-                    {{ form_row(productForm.description) }}
-                    {{ form_row(productForm.createdAt) }}
-                    {{ form_row(productForm.updatedAt) }}
-                    {{ form_row(productForm.isActive) }}
+    {{ form_row(productForm.name) }}
+    {{ form_row(productForm.category) }}
+    {{ form_row(productForm.sku) }}
+    {{ form_row(productForm.description) }}
+    {{ form_row(productForm.createdAt) }}
+    {{ form_row(productForm.updatedAt) }}
+    {{ form_row(productForm.isActive) }}
 
-<button type="submit" class="btn" formnovalidate>{{ buttonText }}</button>
+    <button type="submit" class="btn" formnovalidate>{{ buttonText }}</button>
 {{ form_end(productForm) }}

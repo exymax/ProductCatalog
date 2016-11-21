@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\ProductType;
-use AppBundle\Entity\ProductCategory;
 use AppBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +17,14 @@ class ProductController extends Controller
         $products = $message = null;
         $productsService = $this->get('products_service');
         if ($productsService->categoryExists($category)) {
-            $products = $this->getDoctrine()->getRepository("AppBundle:Product")->findAll();
-        }
-        else {
+            $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
+        } else {
             $message = 'Category';
         }
 
-        return $this->render(':admin/product:list.html.twig', [
+        return $this->render('admin/product/list.html.twig', [
             'products' => $products,
-            'message' => $message
+            'message' => $message,
         ]);
     }
 }

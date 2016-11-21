@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\Role\Role;
 
 /**
  * @ORM\Entity
@@ -64,8 +63,6 @@ class User implements UserInterface
     public function __construct()
     {
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
     }
 
     public function getSalt()
@@ -83,6 +80,7 @@ class User implements UserInterface
         if (!in_array('ROLE_USER', $roles)) {
             $roles[] = 'ROLE_USER';
         }
+
         return $roles;
     }
 
@@ -92,7 +90,7 @@ class User implements UserInterface
     }
 
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
      *
@@ -109,7 +107,6 @@ class User implements UserInterface
     {
         $this->password = $password;
     }
-
 
     public function setEmail($email)
     {

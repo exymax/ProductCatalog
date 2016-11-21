@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12">
+                <div class="row valign-wrapper">
+                    <div class="col s9 valign"><h2>Categories</h2></div>
+                    <div class="col s2 valign">
+                        <a href="{{ path('admin_product_new') }}" class="btn left"><i class="material-icons left">add_circle_outline</i>product</a>
+                    </div>
+                    <div class="col s2 valign">
+                        <a href="{{ path('admin_category_new') }}" class="btn"><i class="material-icons left">add_circle_outline</i>category</a>
+                    </div>
+                </div>
+                <div class="col s12">
+
+                    <table class="striped bordered">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Is active</th>
+                            <th>Parent</th>
+                            <th> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                                <tr>
+                                    <td>{{ category.id }}</td>
+                                    <td>{{ category.name }}</td>
+                                    <td>{{ category.active }}</td>
+                                    <td>{{ category.parent }}</td>
+                                    <td>
+                                        <a href="{{ path('admin_category_edit', {'id': category.id}) }}"><i class="material-icons grey-text">edit</i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body%}

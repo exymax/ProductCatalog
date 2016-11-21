@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/product/formLayout.html.twig' %}
 
 {% block body %}
     <div class="container">
@@ -9,8 +9,8 @@
                 {{ form_start(userForm) }}
                     {{ form_row(userForm.email) }}
                     {{ form_row(userForm.username) }}
-                    {{ form_row(userForm.roles) }}
                     {{ form_row(userForm.isActive) }}
+                    {{ form_row(userForm.roles) }}
 
                 <button type="submit" class="btn" formnovalidate>Save</button>
                 {{ form_end(userForm) }}

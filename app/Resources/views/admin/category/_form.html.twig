@@ -1,0 +1,7 @@
+{{ form_start(categoryForm) }}
+    {{ form_row(categoryForm.name) }}
+    {{ form_row(categoryForm.parent) }}
+    {{ form_row(categoryForm.active) }}
+
+    <button type="submit" class="btn" formnovalidate>{{ buttonText }}</button>
+{{ form_end(categoryForm) }}
