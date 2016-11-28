@@ -8,5 +8,5 @@
     {{ form_row(productForm.isActive) }}
 
     <button type="submit" class="btn" formnovalidate>{{ buttonText }}</button>
-    <a href="{{ path('admin_product_list') }}" class="btn red lighten-1">Cancel</a>
+    <button type="button" class="btn red lighten-1" onclick="history.back(-1)">Cancel</button>
 {{ form_end(productForm) }}

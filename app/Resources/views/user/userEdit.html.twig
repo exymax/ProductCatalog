@@ -1,7 +1,12 @@
 {% extends 'admin/product/formLayout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
 {% block body %}
-    {% include 'breadcrumbs.html.twig' %}
+
     <div class="container">
         <div class="row">
             <div class="col s6">
@@ -9,11 +14,12 @@
 
                 {{ form_start(userForm) }}
                     {{ form_row(userForm.email) }}
-                    {{ form_row(userForm.username) }}
+                    {{ form_row(userForm.username, { 'label': 'Full name'}) }}
                     {{ form_row(userForm.isActive) }}
                     {{ form_row(userForm.roles) }}
 
                 <button type="submit" class="btn" formnovalidate>Save</button>
+                <button type="button" class="btn red lighten-1" onclick="history.back(-1)">Cancel</button>
                 {{ form_end(userForm) }}
             </div>
         </div>

@@ -22,6 +22,10 @@
                                 <li>
                                     {{ knp_menu_render('AppBundle:Builder:mainMenu', {'depth': 1, 'currentClass': 'active', 'currentAsLink': true}) }}
                                 </li>
+                            {% elseif is_granted('ROLE_MOD') %}
+                                <li>
+                                    {{ knp_menu_render('AppBundle:Builder:modMenu', {'depth': 1, 'currentClass': 'active', 'currentAsLink': true}) }}
+                                </li>
                             {% elseif is_granted('ROLE_USER') %}
                                 <li>
                                     {{ knp_menu_render('AppBundle:Builder:userMenu', {'depth': 1, 'currentClass': 'active', 'currentAsLink': true}) }}

@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
 {% block body %}
-    {% include 'breadcrumbs.html.twig' %}
     <div class="container">
         <div class="row">
             <div class="col s12">
@@ -9,7 +13,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Username</th>
+                            <th>Full name</th>
                             <th>Email</th>
                             <th>Roles</th>
                             <th>Is active</th>

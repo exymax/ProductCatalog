@@ -48,8 +48,8 @@
             {% endif %}
         </main>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn-floating waves-effect btn-large red" id="create-product" href="{{ url('admin_product_new') }}" target="_blank"><i class="material-icons">add</i></a>
+    {% if is_granted('ROLE_MANAGE_PRODUCT') %}
+        <a class="btn-floating waves-effect btn-large red" id="create-product" href="{{ url('admin_product_new') }}"><i class="material-icons">add</i></a>
     {% endif %}
 {% endblock %}
 
