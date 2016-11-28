@@ -2,12 +2,10 @@
 
 namespace AppBundle\Services;
 
-
 use Doctrine\ORM\EntityManager;
 
 class CategoryService
 {
-
     private $em;
 
     public function __construct(EntityManager $em)
@@ -19,5 +17,4 @@ class CategoryService
     {
         return $this->em->getRepository('AppBundle:ProductCategory')->findBy(['parent' => null]);
     }
-
 }

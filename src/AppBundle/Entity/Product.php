@@ -88,7 +88,7 @@ class Product
 
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = new \DateTime("now");
+        $this->createdAt = new \DateTime('now');
 
         return $this;
     }
@@ -100,7 +100,7 @@ class Product
 
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = new \DateTime("now");
+        $this->updatedAt = new \DateTime('now');
 
         return $this;
     }

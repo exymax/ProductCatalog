@@ -1,6 +1,6 @@
 <?php
-namespace AppBundle\Services;
 
+namespace AppBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -18,17 +18,18 @@ class DataProcessor
 
     public function getStartID(array $params)
     {
-        return ($params['page']-1)*$params['rows_per_page'];
+        return ($params['page'] - 1) * $params['rows_per_page'];
     }
 
     public function getEndID(array $params)
     {
-        $endPage  = $this->getPageAmount($params['rows_per_page']);
+        $endPage = $this->getPageAmount($params['rows_per_page']);
         $curPage = $endPage - $params['page'];
-        $end = $curPage*$params['rows_per_page'];
-        if ( isset($params['last_id']) ) {
+        $end = $curPage * $params['rows_per_page'];
+        if (isset($params['last_id'])) {
             $end = $params['last_id'] - $params['rows_per_page'];
         }
+
         return $end;
     }
 
@@ -36,16 +37,16 @@ class DataProcessor
     {
         $rowsPerPage = intval($rowsPerPage);
         $rowsPerPage = $this->isValidPage($rowsPerPage) ? $rowsPerPage : 10;
-        $pages =  $this->em
+        $pages = $this->em
             ->createQuery('SELECT COUNT(p) FROM AppBundle:Product p')
             ->getSingleScalarResult();
         $pages = intval($pages);
-        return ceil($pages/$rowsPerPage);
+
+        return ceil($pages / $rowsPerPage);
     }
 
     public function getBasicQueryParams(array $params)
     {
-
         return [
             'start' => $this->getStartID($params),
         ];
@@ -61,22 +62,20 @@ class DataProcessor
         $qb = $this->em->createQueryBuilder();
         $qb->select(array('d'))
             ->from('AppBundle:'.$this->repository, 'd');
-        if($this->needsComplexProcessing($params)) {
-            if(!is_null($params['order_by'])) {
-                $qb->orderBy('d.'.$params['sort_field'], $params['order_by'] );
+        if ($this->needsComplexProcessing($params)) {
+            if (!is_null($params['order_by'])) {
+                $qb->orderBy('d.'.$params['sort_field'], $params['order_by']);
                 if ($params['order_by'] == 'DESC') {
                     $p['start_id'] = $this->getEndID($params);
                 }
-            }
-            elseif(!is_null($params['filter_field'])) {
+            } elseif (!is_null($params['filter_field'])) {
                 $qb->andWhere(
-                    $qb->expr()->like('d.'.$params['filter_field'], ':like_expr' )
+                    $qb->expr()->like('d.'.$params['filter_field'], ':like_expr')
                 );
                 $queryParams['like_expr'] = '%'.$params['filter_pattern'].'%';
             }
             $p['start'] = $this->getStartID($params);
-        }
-        else {
+        } else {
         }
         $qb->setParameters($queryParams)
             ->setFirstResult($p['start'])
@@ -125,12 +124,12 @@ class DataProcessor
                 'pattern' => $pattern,
             ])
             ->getArrayResult();
+
         return intval(array_pop($last)['id']);
     }
 
     public function getSortingLastID()
     {
-
     }
 
     public function handleParams(Request $request)
@@ -177,10 +176,9 @@ class DataProcessor
     public function setRepository($repository)
     {
         $allowed = ['User', 'Product'];
-        if(in_array($repository, $allowed)) {
+        if (in_array($repository, $allowed)) {
             $this->repository = $repository;
-        }
-        else {
+        } else {
             throw new Exception('No repository '.$repository.' found');
         }
     }
@@ -196,19 +194,17 @@ class DataProcessor
         if ($this->toBeFiltered($field, $pattern)) {
             $result['filter_field'] = $field;
             $result['filter_pattern'] = $pattern;
-        }
-        else {
+        } else {
             $result['filter_field'] = $result['filter_pattern'] = null;
         }
     }
 
     public function setSortingParams(&$result, $field, $type)
     {
-        if($this->toBeSorted($field, $type)) {
+        if ($this->toBeSorted($field, $type)) {
             $result['sort_field'] = $field;
             $result['order_by'] = strtoupper($type);
-        }
-        else {
+        } else {
             $result['sort_field'] = $result['order_by'] = null;
         }
     }
@@ -223,9 +219,8 @@ class DataProcessor
         return !is_null($param) && isset($param) && !empty($param);
     }
 
-    public function isValidPage($page) {
-
+    public function isValidPage($page)
+    {
         return filter_var($page, FILTER_VALIDATE_INT);
     }
-
 }

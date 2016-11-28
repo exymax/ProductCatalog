@@ -38,8 +38,8 @@ class ProductAdminController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
-            $product->setCreatedAt(date("Y-m-d"));
-            $product->setUpdatedAt(date("Y-m-d"));
+            $product->setCreatedAt(date('Y-m-d'));
+            $product->setUpdatedAt(date('Y-m-d'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
@@ -79,25 +79,6 @@ class ProductAdminController extends Controller
         return $this->render('admin/product/edit.html.twig', [
             'productForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Security("is_granted('ROLE_MANAGE_PRODUCT')")
-     * @Route("/product/{id}/show", name="admin_product_show")
-     */
-    public function showAction($id)
-    {
-        $product = $this->getDoctrine()
-            ->getRepository('AppBundle:Product')
-            ->find($id);
-
-        if (!$product) {
-            throw $this->createNotFoundException('Product not found');
-        }
-
-        return $this->render('admin/product/show.html.twig', array(
-            'product' => $product,
-        ));
     }
 
     /**

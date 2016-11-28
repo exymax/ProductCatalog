@@ -26,21 +26,21 @@ class ProductsService
 
     public function categoryExists($categoryName)
     {
-        $category = $this->em->getRepository("AppBundle:ProductCategory")->findOneBy(['name' => $categoryName]);
-        if($category instanceof ProductCategory) {
+        $category = $this->em->getRepository('AppBundle:ProductCategory')->findOneBy(['name' => $categoryName]);
+        if ($category instanceof ProductCategory) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public function getFullData($id)
     {
-        if($this->processor->isValidPage($id)) {
+        if ($this->processor->isValidPage($id)) {
             return $this->em->getRepository('AppBundle:Product')->find($id);
+        } else {
+            return [];
         }
-        else return [];
     }
 
     public function getData(Request $request, $adminAccess = false)
@@ -52,7 +52,7 @@ class ProductsService
         $lastID = $serviceResponse['last_id'];
         $this->setCategory($params, $params['category']);
         if ($params['category']) {
-           $querySchema->andWhere(
+            $querySchema->andWhere(
                $querySchema->expr()->eq('d.category', $params['category'])
            );
         }
@@ -78,8 +78,7 @@ class ProductsService
     {
         if ($products && count($products) > 0) {
             return null;
-        }
-        else {
+        } else {
             return 'Products with given params not found';
         }
     }
@@ -100,12 +99,11 @@ class ProductsService
                 'pattern' => $pattern,
             ])
             ->getArrayResult();
+
         return intval(array_pop($last)['id']);
     }
 
     public function getSortingLastID()
     {
-
     }
-
 }

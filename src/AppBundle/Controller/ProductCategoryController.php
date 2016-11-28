@@ -1,11 +1,9 @@
 <?php
 
-
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 
 class ProductCategoryController extends Controller
 {
@@ -19,7 +17,7 @@ class ProductCategoryController extends Controller
 
         return $this->render(
             'admin/category/list2.html.twig', array(
-                'categories' => $categories
+                'categories' => $categories,
             )
         );
     }

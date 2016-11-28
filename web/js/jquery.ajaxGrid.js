@@ -238,8 +238,8 @@
                 for (var i = 0; i < scope.model.length; i++) {
                     var row = scope.model[i];
                         edit = scope.methods.getEditButton(row["id"], scope.adminAccess);
-                    imgUrl = 'https://unsplash.it/250?random='+row["id"];
-                    resultDOM += "<div class='grid-item col s12 m4 l3 z-depth-1 waves-effect rounded'>";
+                    imgUrl = 'https://d13yacurqjgara.cloudfront.net/users/387195/screenshots/2260293/preview_1x.png';
+                    resultDOM += "<div data-id='"+row["id"]+"' class='grid-item col s12 m4 l3 z-depth-1 waves-effect rounded'>";
                     img = "<div class='image-wrapper'>" +
                         "<img src='"+imgUrl+"'>" +
                             edit +
@@ -253,6 +253,11 @@
                 scope.grid.html(resultDOM).fadeIn();
                 scope.paginationWrapper.fadeIn();
                 scope.preloader.fadeOut();
+                scope.context.find(".grid-item").each(function() {
+                    $(this).on("click", function() {
+                        window.location.replace("http://127.0.0.1:8000/products/"+$(this).data("id")+"/show");
+                    })
+                });
             }
         }
     };

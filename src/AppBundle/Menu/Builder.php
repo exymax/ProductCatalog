@@ -2,7 +2,6 @@
 
 namespace AppBundle\Menu;
 
-
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -22,12 +21,13 @@ class Builder implements ContainerAwareInterface
             ]);
 
         $menu->addChild('Categories', [
-            'route' => 'admin_category_list'
+            'route' => 'admin_category_list',
         ]);
 
         $menu->addChild('Users', [
             'route' => 'admin_user_list',
         ]);
+
         return $menu;
     }
 
@@ -46,7 +46,7 @@ class Builder implements ContainerAwareInterface
         ]);
 
         $menu->addChild('Categories', [
-            'route' => 'admin_category_list'
+            'route' => 'admin_category_list',
         ]);
 
         return $menu;

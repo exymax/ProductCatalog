@@ -2,6 +2,19 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <style>
+        body {
+            overflow-y:scroll;
+        }
+
+        nav {
+            display: block;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
